@@ -1,6 +1,8 @@
 package com.ecme.sessionbean;
 
+import javax.ejb.Remote;
 
+@Remote
 public interface IStatefulSessionBean {
 	public String sayHello(String value);
 	
