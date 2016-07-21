@@ -12,8 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.ecme.sessionbean.ILibraryStatefulSessionBeanRemote;
+import com.ecme.sessionbean.ILibraryStatelessSessionBeanRemote;
 
-public class StatefulClient {
+public class StatelessClient {
 
 	 BufferedReader brConsoleReader = null; 
 	   Properties props;
@@ -23,7 +24,7 @@ public class StatefulClient {
 		      InputStream input = null;
 		      try {
 		    	  String filename = "jndi.properties";
-		    		input = StatefulClient.class.getClassLoader().getResourceAsStream(filename);
+		    		input = StatelessClient.class.getClassLoader().getResourceAsStream(filename);
 		    		if(input==null){
 		    	            System.out.println("Sorry, unable to find " + filename);
 		    		}
@@ -51,8 +52,8 @@ public class StatefulClient {
 		      try {
 		         int choice = 1; 
 		 
-		         ILibraryStatefulSessionBeanRemote libraryBean =
-		        		(ILibraryStatefulSessionBeanRemote)ctx.lookup("java:global/ecme-ejb31/LibraryStatefulSessionBean!com.ecme.sessionbean.ILibraryStatefulSessionBeanRemote");
+		         ILibraryStatelessSessionBeanRemote libraryBean =
+		        		(ILibraryStatelessSessionBeanRemote)ctx.lookup("java:global/ecme-ejb31/LibraryStatelessSessionBean!com.ecme.sessionbean.ILibraryStatelessSessionBeanRemote");
 		 
 		         while (choice != 2) {
 		            String bookName;
@@ -81,15 +82,15 @@ public class StatefulClient {
 		            System.out.println((i+1)+". " + book);
 		            i++;
 		         }       
-		         ILibraryStatefulSessionBeanRemote libraryBean1 = 
-		            (ILibraryStatefulSessionBeanRemote)ctx.lookup("java:global/ecme-ejb31/LibraryStatefulSessionBean!com.ecme.sessionbean.ILibraryStatefulSessionBeanRemote");
+		         ILibraryStatelessSessionBeanRemote libraryBean1 = 
+		            (ILibraryStatelessSessionBeanRemote)ctx.lookup("java:global/ecme-ejb31/LibraryStatelessSessionBean!com.ecme.sessionbean.ILibraryStatelessSessionBeanRemote");
 		         List<String> booksList1 = libraryBean1.getBooks();
 		         System.out.println(
 		            "***Using second lookup to get library stateful object***");
 		         System.out.println(
 		            "Book(s) entered so far: " + booksList1.size());
-		         for (int j = 0; j < booksList1.size(); ++j) {
-		            System.out.println((i+1)+". " + booksList1.get(i));
+		         for (int j = 0; j < booksList1.size(); j++) {
+		            System.out.println((i+1)+". " + booksList1.get(j));
 		         }		 
 		      } catch (Exception e) {
 		         System.out.println(e.getMessage());
@@ -106,7 +107,7 @@ public class StatefulClient {
 		   }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		StatefulClient client = new StatefulClient();
+		StatelessClient client = new StatelessClient();
 		client.testStatelessEjb();
 	}
 
