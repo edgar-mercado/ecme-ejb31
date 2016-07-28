@@ -7,16 +7,18 @@ import java.util.List;
 import javax.ejb.AccessTimeout;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.DependsOn;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Singleton;
 
-import com.ecme.sessionbean.ISingletonSessionBean;
+import com.ecme.sessionbean.ISingletonSessionBean2;
 
 @Singleton
 @AccessTimeout(value=2000)
 @ConcurrencyManagement(value = ConcurrencyManagementType.BEAN)
-public class SingletonSessionBean implements ISingletonSessionBean{
+@DependsOn("SingletonSessionBean")
+public class SingletonSessionBean2 implements ISingletonSessionBean2{
 		private List<String> status = new  ArrayList<String>();
 
 		@Lock(LockType.READ)

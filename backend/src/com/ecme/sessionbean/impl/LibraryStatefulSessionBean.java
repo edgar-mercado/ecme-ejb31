@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 import com.ecme.sessionbean.ILibraryStatefulSessionBeanRemote;
@@ -29,4 +30,9 @@ public class LibraryStatefulSessionBean implements ILibraryStatefulSessionBeanRe
 	   public void init(){
 		   System.out.println("Creando STATEFULL BEAN:");
 	   }
+	   @Remove
+	public void remove() {
+		System.out.println("Ejecutando metodo REMOVE de STATEFULL session bean");
+		
+	}
 }

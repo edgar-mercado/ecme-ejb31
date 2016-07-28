@@ -9,4 +9,5 @@ import javax.ejb.Remote;
 public interface ILibraryStatefulSessionBeanRemote {
 	  void addBook(String bookName);
 	   List getBooks();
+	   void remove();
 }
