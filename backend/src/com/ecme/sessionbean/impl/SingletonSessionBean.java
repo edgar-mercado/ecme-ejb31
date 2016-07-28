@@ -22,7 +22,7 @@ public class SingletonSessionBean implements ISingletonSessionBean{
 		@Lock(LockType.READ)
 		public List<String> getStatus() {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -33,20 +33,13 @@ public class SingletonSessionBean implements ISingletonSessionBean{
 		@Lock(LockType.WRITE)
 		@AccessTimeout(value=2000)
 		public void setStatus(String status) {
+			System.out.println("Writing in Singleton from "+Thread.currentThread().getName());
 			try {
-				Thread.sleep(130000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.status.add(status);
 		}
-		
-		@Lock(LockType.WRITE)
-		public void doSomething(String status) {
-
-			setStatus(status);
-		}
-		
-
 }

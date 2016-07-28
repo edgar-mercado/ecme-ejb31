@@ -8,5 +8,4 @@ import javax.ejb.Remote;
 public interface ISingletonSessionBean {
 	public List<String> getStatus();
 	public void setStatus(String status);
-	public void doSomething(String status);
 }

@@ -8,6 +8,6 @@ import javax.ejb.Remote;
 @Remote
 public interface ILibraryStatefulSessionBeanRemote {
 	  void addBook(String bookName);
-	   List getBooks();
+	  List<String> getBooks();
 	   void remove();
 }
