@@ -1,7 +1,6 @@
 package com.ecme.app;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,8 +10,7 @@ import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.ecme.sessionbean.ILibraryStatefulSessionBeanRemote;
-import com.ecme.sessionbean.ILibraryStatelessSessionBeanRemote;
+
 import com.ecme.sessionbean.ISingletonSessionBean;
 
 public class SingletonClient {
@@ -89,11 +87,10 @@ public class SingletonClient {
 		         }
 		         ISingletonSessionBean libraryBean1 = 
 		            (ISingletonSessionBean)ctx.lookup("java:global/ecme-ejb31/SingletonSessionBean!com.ecme.sessionbean.ISingletonSessionBean");
-		         List<String>  booksList1 = libraryBean1.getStatus();
 		         System.out.println(
 		            "***Using second lookup to get singleton bean object***");
 		         System.out.println("Listando de datos ");
-		         	List<String> data = libraryBean.getStatus();
+		         	List<String> data = libraryBean1.getStatus();
 		         	for (String string : data) {
 		         		 System.out.println("data readed: " + string);
 					}

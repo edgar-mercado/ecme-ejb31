@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ILibraryStatefulSessionBeanRemote {
 	  void addBook(String bookName);
-	   List getBooks();
-	   void remove();
+	  List<String> getBooks();
+	  void remove();
 
 }

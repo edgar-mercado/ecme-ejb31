@@ -3,23 +3,35 @@
   <groupId>com.ecme.client</groupId>
   <artifactId>ecme-ejb-client</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  	<properties>
+		<jdk.version>1.7</jdk.version>
+	</properties>
 	<dependencies>
-<!--		<dependency>
-	    <groupId>javax</groupId>
-	    <artifactId>javaee-api</artifactId>
-	    <version>6.0</version>
-	</dependency>
- 	<dependency>
-	    <groupId>org.glassfish.main.appclient.client</groupId>
-	    <artifactId>gf-client</artifactId>
-	    <version>4.1.1</version>
-	    <scope>system</scope>
-	    <systemPath>/Users/emercado/Documents/ecme/glassfish4/glassfish/lib/gf-client.jar</systemPath>
-	</dependency>
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>6.0</version>
+		    <scope>provided</scope>
+		</dependency>
+<!--	 	<dependency>
+		    <groupId>org.glassfish.main.appclient.client</groupId>
+		    <artifactId>gf-client</artifactId>
+		    <version>4.1.1</version>
+		    <scope>system</scope>
+		    <systemPath>/Users/emercado/Documents/ecme/glassfish4/glassfish/lib/gf-client.jar</systemPath>
+		</dependency>
 -->	</dependencies>
 	<build>
 	  <plugins>
-
+		 <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-compiler-plugin</artifactId>
+			        <version>3.5.1</version>
+			        <configuration>
+			          <source>${jdk.version}</source>
+			          <target>${jdk.version}</target>
+			        </configuration>
+		  </plugin>
 	      <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-surefire-plugin</artifactId>

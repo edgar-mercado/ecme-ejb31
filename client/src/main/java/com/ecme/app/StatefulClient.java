@@ -11,7 +11,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.ecme.sessionbean.ILibraryStatefulSessionBeanRemote;
-import com.ecme.sessionbean.ILibraryStatelessSessionBeanRemote;
 public class StatefulClient {
 
 	 BufferedReader brConsoleReader = null; 
