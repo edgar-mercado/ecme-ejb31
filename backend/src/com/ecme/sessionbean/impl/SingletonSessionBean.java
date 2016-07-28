@@ -30,16 +30,31 @@ public class SingletonSessionBean implements ISingletonSessionBean{
 			return status;
 		}
 
+		public void setStatus(String status) {
+			synchronized (this) {
+				System.out.println("Writing in Singleton from "+Thread.currentThread().getName());
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.status.add(status);
+				
+			}
+		}
 		@Lock(LockType.WRITE)
 		@AccessTimeout(value=2000)
-		public void setStatus(String status) {
-			System.out.println("Writing in Singleton from "+Thread.currentThread().getName());
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.status.add(status);
+		public void setStatus2(String status) {
+				System.out.println("Writing in Singleton from "+Thread.currentThread().getName());
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.status.add(status);
 		}
+
+		
 }

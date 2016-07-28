@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.AfterBegin;
+import javax.ejb.AfterCompletion;
+import javax.ejb.BeforeCompletion;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
@@ -26,13 +32,37 @@ public class LibraryStatefulSessionBean implements ILibraryStatefulSessionBeanRe
 	   public List<String> getBooks() {
 	      return bookShelf;
 	   }
-	   @PostConstruct
-	   public void init(){
-		   System.out.println("Creando STATEFULL BEAN:");
-	   }
-	   @Remove
-	public void remove() {
-		System.out.println("Ejecutando metodo REMOVE de STATEFULL session bean");
-		
-	}
+		@PostConstruct
+		public void init(){
+			System.out.println("_______________@PostConstruct EXECUTED ___________________");
+		}
+		@PreDestroy
+		public void destroy(){
+			System.out.println("_______________@PreDestroy EXECUTED ___________________");
+		}
+		@Remove
+		public void remove(){
+			System.out.println("_______________@Remove EXECUTED ___________________");
+		}
+		@PrePassivate
+		public void prePassivate(){
+			System.out.println("_______________@PrePassivate EXECUTED ___________________");
+		}
+		@PostActivate
+		public void postActivate(){
+			System.out.println("_______________@PostActivate EXECUTED ___________________");
+		}
+		@AfterBegin
+		public void afterBegin(){
+			System.out.println("_______________@AfterBegin -A new transaction has started-. ___________________");
+		}
+		@BeforeCompletion
+		private void beforeCompletion(){
+		         System.out.println("_______________@BeforeCompletion -A transaction is about to be committed ___________________");
+		}
+
+		@AfterCompletion
+		private void afterCompletion(boolean commited){
+		         System.out.println("_______________@AfterCompletion -a transaction commit protocol has completed, and tells the instance whether the transaction has been committed or rolled back , based on committed value : " + commited);
+		}
 }
