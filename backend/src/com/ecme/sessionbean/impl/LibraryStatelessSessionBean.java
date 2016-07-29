@@ -2,15 +2,12 @@ package com.ecme.sessionbean.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.AfterBegin;
-import javax.ejb.AfterCompletion;
-import javax.ejb.BeforeCompletion;
-import javax.ejb.PostActivate;
-import javax.ejb.PrePassivate;
-import javax.ejb.Remove;
+import javax.ejb.AsyncResult;
+import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 
 import com.ecme.sessionbean.ILibraryStatelessSessionBeanRemote;
@@ -23,10 +20,19 @@ public class LibraryStatelessSessionBean implements ILibraryStatelessSessionBean
 	   public LibraryStatelessSessionBean(){
 	      bookShelf = new ArrayList<String>();
 	   }
-	 
-	   public void addBook(String bookName) {
+	   @Asynchronous
+	   public Future<String> addBook(String bookName) {
+		  System.out.println("!!!!!Agregando libro stateless:"+bookName+" from thread: "+Thread.currentThread().getName());
 	      bookShelf.add(bookName);
-	      System.out.println("!!!!!Agregando libro stateless:"+bookName);
+		    try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	      System.out.println("Agregado ----------> "+bookName);
+	      return new AsyncResult<String>("RESULT_"+bookName+Thread.currentThread().getName());
+	    		  
 	   }    
 	 
 	   public List<String> getBooks() {

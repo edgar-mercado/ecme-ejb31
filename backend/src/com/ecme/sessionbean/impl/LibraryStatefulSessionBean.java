@@ -41,7 +41,7 @@ public class LibraryStatefulSessionBean implements ILibraryStatefulSessionBeanRe
 			System.out.println("_______________@PreDestroy EXECUTED ___________________");
 		}
 		@Remove
-		public void remove(){
+		public void invalidateSession(){
 			System.out.println("_______________@Remove EXECUTED ___________________");
 		}
 		@PrePassivate

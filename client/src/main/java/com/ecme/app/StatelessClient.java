@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.Future;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -66,7 +67,9 @@ public class StatelessClient {
 		               System.out.print("Enter book name: ");
 		               bookName = brConsoleReader.readLine();
 
-		               libraryBean.addBook(bookName);          
+		               Future<String> response= libraryBean.addBook(bookName);
+		               Thread.sleep(4000);
+		               System.out.print("Esperando respuesta .... "+response.get());
 		            } else if (choice == 2) {
 		               break;
 		            }

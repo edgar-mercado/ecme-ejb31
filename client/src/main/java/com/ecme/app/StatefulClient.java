@@ -71,6 +71,9 @@ public class StatefulClient {
 		            }
 		         }
 		         System.out.println("Listando libros ");
+		         
+		         libraryBean.invalidateSession();
+		         
 		         List<String> booksList = libraryBean.getBooks();
 		 
 		         System.out.println("Book(s) entered so far: " + booksList.size());
@@ -89,6 +92,7 @@ public class StatefulClient {
 		         for (int j = 0; j < booksList1.size(); ++j) {
 		            System.out.println((i+1)+". " + booksList1.get(i));
 		         }		 
+		         
 		      } catch (Exception e) {
 		         System.out.println(e.getMessage());
 		         e.printStackTrace();
