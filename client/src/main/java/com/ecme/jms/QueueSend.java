@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+import javax.jms.DeliveryMode;
 import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
@@ -52,6 +53,7 @@ public class QueueSend {
 		    qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 		    queue = (Queue) ctx.lookup(queueName);
 		    qsender = qsession.createSender(queue);
+		    qsender.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 		    msg = qsession.createTextMessage();
 		    qcon.start();
 		 }
@@ -103,7 +105,8 @@ public class QueueSend {
 		     System.out.print("Enter message (\"quit\" to quit): \n");
 		     line = msgStream.readLine();
 		     if (line != null && line.trim().length() != 0) {
-		       qs.send(line);
+		    	 for (int i=0; i<1000 ; i++)
+		    		 qs.send(line+i);
 		       System.out.println("JMS Message Sent: "+line+"\n");
 		       quitNow = line.equalsIgnoreCase("quit");
 		     }

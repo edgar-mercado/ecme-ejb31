@@ -1,15 +1,12 @@
 package com.ecme.jms;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.jms.Topic;
 import javax.jms.TopicConnection;
 import javax.jms.TopicConnectionFactory;
@@ -34,7 +31,6 @@ public class TopicSend {
 		 private TopicSession tsession;
 		 private TopicPublisher tPublisher;
 		 private Topic topic;
-		 private TextMessage msg;
 
 		 /**
 		  * Creates all the necessary objects for sending
@@ -54,8 +50,8 @@ public class TopicSend {
 		    topic = (Topic) ctx.lookup(topicName);
 		    tPublisher = tsession.createPublisher(topic);
 		    MapMessage message = tsession.createMapMessage();
-		    message.setString("Subject", "TITULO del TOPIC");
-		    message.setString("Content", "Contenidoooooooooo");
+		    message.setString("Subject", "This is the subject of your message");
+		    message.setString("Content", "This is the content bla bla bla ...");
 		    tPublisher.publish(message);
 		 }
 
@@ -75,35 +71,13 @@ public class TopicSend {
 		 * @exception Exception if operation fails
 		 */
 		 public static void main(String[] args) throws Exception {
-		//    if (args.length != 1) {
-		//     System.out.println("Usage: java examples.jms.queue.QueueSend WebLogicURL");
-		//     return;
-		//    }
+
 		    InitialContext ic = getInitialContext("");
 		    TopicSend qs = new TopicSend();
 		    qs.init(ic, TOPIC);
-		//    readAndSend(qs);
 		    qs.close();
 		 }
 
-	/*	 private static void readAndSend(TopicSend qs)
-		    throws IOException, JMSException
-		 {
-		    BufferedReader msgStream = new BufferedReader(new InputStreamReader(System.in));
-		    String line=null;
-		    boolean quitNow = false;
-		    do {
-		     System.out.print("Enter message (\"quit\" to quit): \n");
-		     line = msgStream.readLine();
-		     if (line != null && line.trim().length() != 0) {
-		       qs.send(line);
-		       System.out.println("JMS Message Sent: "+line+"\n");
-		       quitNow = line.equalsIgnoreCase("quit");
-		     }
-		    } while (! quitNow);
-
-		 }
-*/
 		 private static InitialContext getInitialContext(String url)
 		    throws NamingException
 		 {
